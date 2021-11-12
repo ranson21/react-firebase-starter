@@ -1,6 +1,6 @@
 load_envs:=. ./.env
 
-all: check init apply push_repo done
+all: check init apply create_env done
 
 .PHONY: check
 check:
@@ -16,6 +16,10 @@ init:
 apply:
 	${load_envs} && terraform apply
 
+.PHONY: create_env
+create_env:
+	@./create_env.sh
+
 .PHONY: push_repo
 push_repo:
 	git config --global credential.https://source.developers.google.com.helper gcloud.sh
@@ -26,7 +30,7 @@ push_repo:
 		git remote set-url google "$$repo_url"; \
 	fi
 	git push google master
-
+ 
 .PHONY: done
 done:
 	@echo

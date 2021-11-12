@@ -21,10 +21,25 @@ resource "google_project_iam_member" "owner" {
   depends_on = [google_project.project]
 }
 
+resource "google_project_iam_member" "secret_accessor" {
+  role    = "roles/secretmanager.secretAccessor"
+  member  = "user:${var.user}"
+  project = var.project_id
+
+  depends_on = [google_project_service.cloud_build]
+}
+
 resource "google_project_service" "compute" {
   service    = "compute.googleapis.com"
   depends_on = [google_project.project]
 }
+
+resource "google_project_service" "secretmanager" {
+  # provider   = google-beta
+  service    = "secretmanager.googleapis.com"
+  depends_on = [google_project.project]
+}
+
 
 resource "google_project_service" "container_registry" {
   service    = "containerregistry.googleapis.com"

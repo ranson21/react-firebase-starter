@@ -48,3 +48,8 @@ resource "google_firebase_web_app" "react_firebase_starter" {
 
   depends_on = [google_firebase_project.default]
 }
+
+data "google_firebase_web_app_config" "basic" {
+  provider   = google-beta
+  web_app_id = google_firebase_web_app.react_firebase_starter.app_id
+}
