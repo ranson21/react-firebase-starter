@@ -1,6 +1,6 @@
 load_envs:=. ./.env
 
-all: check init apply create_env done
+all: check init apply create_env create_user done
 
 .PHONY: check
 check:
@@ -19,6 +19,10 @@ apply:
 .PHONY: create_env
 create_env:
 	@./create_env.sh
+
+.PHONY: create_user
+create_env:
+	@./create_user.sh
 
 .PHONY: push_repo
 push_repo:

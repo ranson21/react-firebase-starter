@@ -3,11 +3,11 @@ import React, { useState } from 'react';
 import clsx from 'clsx';
 import { TextField, MenuList, InputAdornment, ClickAwayListener } from '@material-ui/core';
 import { ArrowDropDown } from '@material-ui/icons';
-import { Menu } from 'app/components/shared/Menu';
+import { Menu } from 'app/components/Menu';
 import { makeStyles } from '@material-ui/core/styles';
 
 // Component Dependencies
-import { ItemNotFound } from 'app/components/shared/ItemNotFound';
+import { ItemNotFound } from 'app/components/ItemNotFound';
 
 // Util Dependencies
 import { selectInputValue } from 'app/utils/format';

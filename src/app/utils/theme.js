@@ -1,11 +1,11 @@
 // External Dependencies
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createTheme } from '@material-ui/core/styles';
 
 /**
  * Method to set the application theme
  */
-export const theme = createMuiTheme({
-  themeName: 'Audit Signal Theme',
+export const theme = createTheme({
+  themeName: 'React Firebase Theme',
   breakpoints: {
     keys: ['xs', 'sm', 'md', 'lg', 'xl'],
     values: { xs: 0, lg: 1280, sm: 600, xl: 1920, md: 960 },

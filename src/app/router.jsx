@@ -9,6 +9,7 @@ import { PublicRoute } from 'app/navigation/PublicRoute';
 import { PrivateRoute } from 'app/navigation/PrivateRoute';
 import { LoadScreen } from 'app/screens/Loading';
 import { userState } from 'app/state/auth';
+import { componentLoader } from 'app/utils/loader';
 
 // Top-Level routes
 export const ROUTES = [

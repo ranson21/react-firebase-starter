@@ -7,11 +7,9 @@ import { LoadScreen } from 'app/screens/Loading';
 import { RecoilRoot } from 'recoil';
 
 // Import the Firebase app initializer
-import { init } from 'app/config/firebase';
+import { init } from 'app/utils/firebase';
 
-// Lazy load the application
-const App = React.lazy(() => import('app/root'));
-const Theme = React.lazy(() => import('app/components/ThemeWrapper'));
+import App from 'app/root';
 
 // Set the DOM Element to attach the SPA
 const root = document.getElementById('root');
@@ -33,9 +31,7 @@ export const renderer = (Component, dom) =>
   render(
     <RecoilRoot>
       <Suspense fallback={<LoadScreen />}>
-        <Theme>
-          <Component firebase={firebase} />
-        </Theme>
+        <Component firebase={firebase} />
       </Suspense>
     </RecoilRoot>,
     dom

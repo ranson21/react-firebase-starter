@@ -15,7 +15,7 @@ module.exports = options =>
   webpackMerge(commonConfig({ env: ENV }), {
     devtool: 'cheap-module-source-map', // https://reactjs.org/docs/cross-origin-errors.html
     mode: ENV,
-    entry: ['react-hot-loader/patch', './src/app/utils/prototypes', './src/app/index.jsx'],
+    entry: ['react-hot-loader/patch', './src/app/index.jsx'],
     output: {
       path: path.resolve(__dirname, '..', 'build'),
       filename: 'app/[name].bundle.js',
@@ -29,7 +29,6 @@ module.exports = options =>
       inline: true,
       watchContentBase: true,
       contentBase: './build/index.html',
-      proxy: [],
       watchOptions: {
         ignored: /node_modules/,
       },

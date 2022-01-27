@@ -8,9 +8,10 @@ provider "google" {
 }
 
 resource "google_project" "project" {
-  name            = var.project_name
-  project_id      = var.project_id
-  billing_account = data.google_billing_account.account.id
+  name                = var.project_name
+  project_id          = var.project_id
+  billing_account     = data.google_billing_account.account.id
+  auto_create_network = false
 }
 
 resource "google_project_iam_member" "owner" {

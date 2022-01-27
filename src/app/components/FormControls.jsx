@@ -11,7 +11,9 @@ import {
   Radio,
   RadioGroup,
 } from '@material-ui/core';
+import { Field } from 'react-final-form';
 import { makeStyles } from '@material-ui/core/styles';
+import InputMask from 'react-input-mask';
 
 // Create the styles for the properties panel
 export const useStyles = makeStyles(theme => ({
@@ -24,17 +26,35 @@ export const useStyles = makeStyles(theme => ({
  * Text Field Form component
  * @param {Object} props -- Contains form meta and field props
  */
-export const Text = ({ label, input, meta: { touched, invalid, error }, ...custom }) => (
-  <TextField
-    size="small"
-    label={label}
-    placeholder={label}
-    error={touched && invalid}
-    helperText={touched && error}
-    {...input}
-    {...custom}
-  />
-);
+export const Text = ({ name, fieldProps, mask, ...custom }) => {
+  return (
+    <Field name={name} {...fieldProps}>
+      {({ input, meta: { touched, error } }) => {
+        const Control = controlProps => (
+          <TextField
+            {...controlProps}
+            fullWidth
+            error={touched && Boolean(error)}
+            helperText={touched && error}
+            name={name}
+            variant="outlined"
+            id={name}
+            autoComplete={name}
+            {...custom}
+          />
+        );
+
+        return mask ? (
+          <InputMask disabled={mask === undefined} mask={mask} {...input}>
+            {InputProps => Control(InputProps)}
+          </InputMask>
+        ) : (
+          Control(input)
+        );
+      }}
+    </Field>
+  );
+};
 
 /**
  * Check Box Form component

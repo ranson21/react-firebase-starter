@@ -5,10 +5,11 @@ import { Paper, Slide, Avatar, Box, Button, CircularProgress, Grid, InputAdornme
 import { makeStyles } from '@material-ui/core/styles';
 import { AccountCircle, LockOutlined, VpnKey as Key } from '@material-ui/icons';
 import { Alert } from '@material-ui/lab';
+import { useRecoilState } from 'recoil';
 
 // Componenet Dependencies
-import { Copyright } from 'app/components/shared/Copyright';
-import { Text } from 'app/components/forms/Controls';
+import { Copyright } from 'app/components/Copyright';
+import { Text } from 'app/components/FormControls';
 import { validate } from 'app/utils/validators';
 import { userState } from 'app/state/auth';
 
@@ -44,10 +45,6 @@ export const useStyles = makeStyles(theme => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
     color: theme.palette.primary.contrastText,
-  },
-  root: {
-    minWidth: 400,
-    minHeight: 500,
   },
   alert: {
     marginLeft: theme.spacing(2),

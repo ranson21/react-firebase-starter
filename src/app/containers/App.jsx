@@ -4,13 +4,15 @@ import { CssBaseline } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 // Component Dependencies
-import { AppBar } from 'app/components/layout/AppBar';
-import { ErrorBoundary } from 'app/components/shared/ErrorBoundary';
+import { AppBar } from 'app/components/AppBar';
+import { ErrorBoundary } from 'app/components/ErrorBoundary';
 import { appBarHeight } from 'app/styles';
+import { ThemeWrapper } from 'app/components/ThemeWrapper';
 
 // Create the styles for the private layout
 export const useStyles = makeStyles(theme => ({
   root: {
+    height: '100%',
     backgroundColor: theme.palette.background.default,
   },
   content: {
@@ -28,7 +30,7 @@ export const AppContainer = ({ Screen, ...props }) => {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    <ThemeWrapper className={classes.root}>
       <CssBaseline />
       {/* Top Level */}
       <ErrorBoundary component="AppBar">
@@ -41,6 +43,6 @@ export const AppContainer = ({ Screen, ...props }) => {
           <Screen {...props} />
         </ErrorBoundary>
       </main>
-    </div>
+    </ThemeWrapper>
   );
 };

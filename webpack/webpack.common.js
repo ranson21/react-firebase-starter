@@ -13,11 +13,11 @@ module.exports = options => ({
     extensions: ['.js', '.jsx', '.json'],
     modules: ['node_modules'],
     alias: {
-      node_modules: path.join(__dirname, '..', 'node_modules'),
-      app: path.join(__dirname, '..', 'src/app'),
-      web: path.join(__dirname, '..', 'src/web'),
-      images: path.join(__dirname, '..', 'src/web/img'),
-      data: path.join(__dirname, '..', 'src/data'),
+      node_modules: path.resolve(__dirname, '..', 'node_modules'),
+      app: path.resolve(__dirname, '..', 'src/app'),
+      web: path.resolve(__dirname, '..', 'src/web'),
+      images: path.resolve(__dirname, '..', 'src/web/img'),
+      data: path.resolve(__dirname, '..', 'src/data'),
     },
   },
   module: {
@@ -67,6 +67,7 @@ module.exports = options => ({
     new HtmlWebpackPlugin({
       template: './src/web/index.html',
       chunksSortMode: 'dependency',
+      chunks: ['vendor', 'main', 'common'],
       inject: 'body',
       title: process.env.APP_NAME || 'React-Firebase',
     }),
