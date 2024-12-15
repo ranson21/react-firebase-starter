@@ -1,0 +1,50 @@
+name: Check Required Labels
+
+on:
+  pull_request:
+    types: [opened, labeled, unlabeled, synchronize]
+
+jobs:
+  check-labels:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check for required labels
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const requiredLabels = ['semver:major', 'semver:minor', 'semver:patch'];
+            const prLabels = context.payload.pull_request.labels.map(label => label.name);
+            
+            const hasRequiredLabel = requiredLabels.some(label => prLabels.includes(label));
+            
+            if (!hasRequiredLabel) {
+              core.setFailed('PR must have one of the following labels: ' + requiredLabels.join(', '));
+            }
+
+      - name: Update Check Run
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const requiredLabels = ['semver:major', 'semver:minor', 'semver:patch'];
+            const prLabels = context.payload.pull_request.labels.map(label => label.name);
+            const hasRequiredLabel = requiredLabels.some(label => prLabels.includes(label));
+            
+            const conclusion = hasRequiredLabel ? 'success' : 'failure';
+            const title = hasRequiredLabel ? 'Required label present' : 'Missing required label';
+            const summary = hasRequiredLabel 
+              ? 'PR has one of the required semver labels'
+              : 'PR must have one of the following labels: ' + requiredLabels.join(', ');
+            
+            await github.rest.checks.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              name: 'Label Check',
+              head_sha: context.payload.pull_request.head.sha,
+              status: 'completed',
+              conclusion: conclusion,
+              output: {
+                title: title,
+                summary: summary
+              }
+            });
